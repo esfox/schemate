@@ -105,3 +105,6 @@ dist
 
 # Documents
 docs
+
+# Sample SQLite databases
+*.sqlite
