@@ -4,6 +4,8 @@ import fs from 'fs';
 import { settings } from '../settings';
 import { getConfig, getMigrationsDirectory, validateModule } from '../helpers/common-helpers';
 
+// TODO: Change operation returns to proper returns.
+// TODO: Implement config.
 export class Migrations {
 
   /**
@@ -34,9 +36,10 @@ export class Migrations {
   }
 
   /**
-   * Migrates a given module.
+   * Migrates a given module, if provided.
+   * If not, migrates all modules.
    *
-   * @param {string} moduleName
+   * @param {string} [moduleName]
    */
   static migrate(moduleName) {
     let moduleToMigrate = settings.INSTALLED_MODULES;
@@ -50,10 +53,32 @@ export class Migrations {
   }
 
   /**
-   * Rollbacks a all modules.
+   * Rollbacks a given module, if provided.
+   * If not, migrates all modules.
+   *
+   * @param {string} [moduleName]
    */
-  static rollback() {
-    return knex.migrate.rollback(settings.INSTALLED_MODULES);
+  static async rollback(moduleName) {
+
+    if(moduleName) {
+      validateModule(moduleName);
+      return knex.migrate.rollback(getConfig(moduleName));
+    }
+
+    const config = getConfig(settings.INSTALLED_MODULES);
+    let rollbackResult = await knex.migrate.rollback(config);
+    let [rollbackedBatch] = rollbackResult;
+    if(rollbackedBatch <= 0)
+      return rollbackResult;
+
+    let rollbackResults = [];
+    while(rollbackedBatch > 0) {
+      rollbackResult = await knex.migrate.rollback(config);
+      [rollbackedBatch] = rollbackResult;
+      rollbackResults.push(rollbackResult);
+    }
+
+    return rollbackResults;
   }
 
   /**
