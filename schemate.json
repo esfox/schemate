@@ -1,0 +1,19 @@
+{
+  "knexPath": "./database/connection",
+  "modulesDefaultDir": "./modules",
+  "modules":
+  [
+    {
+      "name": "incidents",
+      "migrations": "./incidents/migrations"
+    },
+    {
+      "name": "posts",
+      "migrations": "./posts/migrations"
+    },
+    {
+      "name": "comments",
+      "migrations": "./comments/migrations"
+    }
+  ]
+}
