@@ -2,11 +2,11 @@ import knex from '../database/connection';
 import path from 'path';
 import fs from 'fs';
 import { settings } from '../settings';
-import { getConfig, getMigrationsDirectory, validateModule } from '../helpers/common-helpers';
+import { getConfig, getMigrationsDirectory, validateModule } from './helpers';
 
 // TODO: Change operation returns to proper returns.
 // TODO: Implement config.
-export class Migrations {
+export const Migrations = new class {
 
   /**
    * Creates a migration file.
@@ -14,7 +14,7 @@ export class Migrations {
    * @param {string} moduleName
    * @param {string} migrationName
    */
-  static create(moduleName, migrationName) {
+  create(moduleName, migrationName) {
     validateModule(moduleName);
     return knex.migrate.make(migrationName, getConfig(moduleName));
   }
@@ -24,7 +24,7 @@ export class Migrations {
    *
    * @param {string} moduleName
    */
-  static list(moduleName) {
+  list(moduleName) {
     if(!moduleName)
       throw new Error('Module name is not given.');
 
@@ -41,7 +41,7 @@ export class Migrations {
    *
    * @param {string} [moduleName]
    */
-  static migrate(moduleName) {
+  migrate(moduleName) {
     let moduleToMigrate = settings.INSTALLED_MODULES;
 
     if(moduleName) {
@@ -58,7 +58,7 @@ export class Migrations {
    *
    * @param {string} [moduleName]
    */
-  static async rollback(moduleName) {
+  async rollback(moduleName) {
 
     if(moduleName) {
       validateModule(moduleName);
@@ -87,8 +87,20 @@ export class Migrations {
    * @param {string} moduleName
    * @param {string} migrationName
    */
-  static up(moduleName, migrationName) {
-    return Migrations._migrateOne(moduleName, migrationName);
+  async up(moduleName, migrationName) {
+
+    let migrationFiles = this.list(moduleName);
+    migrationFiles = migrationFiles.sort((a, b) => a.localeCompare(b));
+
+    const migrationResults = [];
+    for(const migrationFile of migrationFiles) {
+
+      migrationResults.push(await this._migrateOne(moduleName, migrationFile));
+      if(migrationFile === migrationName)
+        break;
+    }
+
+    return migrationResults;
   }
 
   /**
@@ -97,8 +109,21 @@ export class Migrations {
    * @param {string} moduleName
    * @param {string} migrationName
    */
-  static down(moduleName, migrationName) {
-    return Migrations._migrateOne(moduleName, migrationName, false);
+  async down(moduleName, migrationName) {
+
+    validateModule(moduleName);
+    let [migrationFiles] = await knex.migrate.list(getConfig(moduleName));
+    migrationFiles = migrationFiles.sort((a, b) => b.localeCompare(a));
+
+    const migrationResults = [];
+    for(const migrationFile of migrationFiles) {
+
+      migrationResults.push(await this._migrateOne(moduleName, migrationFile, false));
+      if(migrationFile === migrationName)
+        break;
+    }
+
+    return migrationResults;
   }
 
   /**
@@ -109,7 +134,7 @@ export class Migrations {
    * @param {string} migrationName
    * @param {boolean} [doUp]
    */
-  static _migrateOne(moduleName, migrationName, doUp = true) {
+  _migrateOne(moduleName, migrationName, doUp = true) {
     const config = getConfig(moduleName);
 
     if(migrationName) {
@@ -124,4 +149,4 @@ export class Migrations {
       ? knex.migrate.up(config)
       : knex.migrate.down(config);
   }
-}
+};
