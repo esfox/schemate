@@ -108,3 +108,6 @@ docs
 
 # Sample SQLite databases
 *.sqlite
+
+# Sample directory
+src
