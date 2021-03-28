@@ -1,11 +1,11 @@
-import knex from '../database/connection';
 import fs from 'fs';
 import path from 'path';
 
 import { Utils } from './utils';
 
+import { knex } from './config';
+
 // TODO: Change operation returns to proper returns.
-// TODO: Implement config.
 export class MigrationService {
 
   /**

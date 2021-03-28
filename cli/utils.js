@@ -1,4 +1,6 @@
-import { settings } from '../settings';
+import path from 'path';
+
+import { modules } from './config';
 
 export class Utils {
 
@@ -7,7 +9,10 @@ export class Utils {
    *
    * @param {string} modulesName Name of the module to get the migrations directory of.
    */
-  static getMigrationsDirectory = moduleName => `./src/${moduleName}/migrations/`;
+  static getMigrationsDirectory(moduleName) {
+    Utils.validateModule(moduleName);
+    return path.resolve(modules[moduleName].migrationsDir);
+  };
 
   /**
    * Creates a migration config.
@@ -18,9 +23,10 @@ export class Utils {
   static get(moduleName) {
 
     if(!moduleName)
-      moduleName = settings.INSTALLED_MODULES;
+      moduleName = Object.keys(modules);
+    else
+      Utils.validateModule(moduleName);
 
-    // TODO: Make dynamic later
     return ({
       directory: Array.isArray(moduleName)
         ? moduleName.map(Utils.getMigrationsDirectory)
@@ -36,7 +42,7 @@ export class Utils {
    * @param {string} moduleName Name of the module to validate.
    */
   static validateModule(moduleName) {
-    if(!settings.INSTALLED_MODULES.includes(moduleName))
-      throw new Error(`${moduleName} is not available in current modules in src.`);
+    if(!modules[moduleName])
+      throw new Error(`The module '${moduleName}' is not available in the modules specified in the config file.`);
   }
 }
