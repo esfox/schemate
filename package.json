@@ -9,6 +9,7 @@
   "bin": {
     "schemate": "bin/handle.js"
   },
+  "types": "./lib/typings/index.d.ts",
   "author": "osairis100@gmail.com",
   "license": "MIT",
   "dependencies": {
