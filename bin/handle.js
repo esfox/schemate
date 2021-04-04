@@ -15,15 +15,6 @@ const commands = [
     },
   },
   {
-    command: 'create <module> <filename>',
-    aliases: 'new',
-    describe: 'Create a new migration file for the given module.',
-    handler: async argv => {
-      const filepath = await Migrations.create(argv.module, argv.filename);
-      console.log(`Migration file created in '${filepath}'.`);
-    },
-  },
-  {
     command: 'add-module <moduleName> <directory>',
     aliases: 'am',
     describe: 'Adds a new module in the config file.',
@@ -31,6 +22,15 @@ const commands = [
       const { moduleName, directory } = argv;
       Config.addModule(moduleName, directory);
       console.log(`Added '${moduleName}' module to the config.`);
+    },
+  },
+  {
+    command: 'create <module> <filename>',
+    aliases: 'new',
+    describe: 'Create a new migration file for the given module.',
+    handler: async argv => {
+      const filepath = await Migrations.create(argv.module, argv.filename);
+      console.log(`Migration file created in '${filepath}'.`);
     },
   },
   {
