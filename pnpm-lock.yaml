@@ -1,9 +1,10 @@
 dependencies:
+  esm: 3.2.25
   knex: 0.21.18_sqlite3@5.0.2
+  yargs: 16.2.0
 devDependencies:
   chai: 4.3.0
   dotenv: 8.2.0
-  esm: 3.2.25
   mocha: 8.3.0
   sqlite3: 5.0.2
 lockfileVersion: 5.2
@@ -45,7 +46,6 @@ packages:
     resolution:
       integrity: sha1-7QMXwyIGT3lGbAKWa922Bas32Zg=
   /ansi-regex/5.0.0:
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -53,7 +53,6 @@ packages:
   /ansi-styles/4.3.0:
     dependencies:
       color-convert: 2.0.1
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -326,10 +325,9 @@ packages:
       integrity: sha512-qOhPa/Fj7s6TY8H8esGu5QNpMMQxz79h+urzrNYN6mn+9BnxlDGf5QZ+XeCDsxSjPqsSR56XOZOJmpeurnLMeg==
   /cliui/7.0.4:
     dependencies:
-      string-width: 4.2.1
+      string-width: 4.2.2
       strip-ansi: 6.0.0
       wrap-ansi: 7.0.0
-    dev: true
     resolution:
       integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==
   /code-point-at/1.1.0:
@@ -350,13 +348,11 @@ packages:
   /color-convert/2.0.1:
     dependencies:
       color-name: 1.1.4
-    dev: true
     engines:
       node: '>=7.0.0'
     resolution:
       integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==
   /color-name/1.1.4:
-    dev: true
     resolution:
       integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
   /colorette/1.2.1:
@@ -544,11 +540,9 @@ packages:
     resolution:
       integrity: sha1-OoOpBOVDUyh4dMVkt1SThoSamMk=
   /emoji-regex/8.0.0:
-    dev: true
     resolution:
       integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==
   /escalade/3.1.1:
-    dev: true
     engines:
       node: '>=6'
     resolution:
@@ -560,6 +554,7 @@ packages:
     resolution:
       integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
   /esm/3.2.25:
+    dev: false
     engines:
       node: '>=6'
     resolution:
@@ -787,7 +782,6 @@ packages:
     resolution:
       integrity: sha1-LANAXHU4w51+s3sxcCLjJfsBi/c=
   /get-caller-file/2.0.5:
-    dev: true
     engines:
       node: 6.* || 8.* || >= 10.*
     resolution:
@@ -1108,7 +1102,6 @@ packages:
     resolution:
       integrity: sha1-o7MKXE8ZkYMWeqq5O+764937ZU8=
   /is-fullwidth-code-point/3.0.0:
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -1907,7 +1900,6 @@ packages:
     resolution:
       integrity: sha512-MsvtOrfG9ZcrOwAW+Qi+F6HbD0CWXEh9ou77uOb7FM2WPhwT7smM833PzanhJLsgXjN89Ir6V2PczXNnMpwKhw==
   /require-directory/2.1.1:
-    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -2124,16 +2116,15 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-nOqH59deCq9SRHlxq1Aw85Jnt4w6KvLKqWVik6oA9ZklXLNIOlqg4F2yrT1MVaTjAqvVwdfeZ7w7aCvJD7ugkw==
-  /string-width/4.2.1:
+  /string-width/4.2.2:
     dependencies:
       emoji-regex: 8.0.0
       is-fullwidth-code-point: 3.0.0
       strip-ansi: 6.0.0
-    dev: true
     engines:
       node: '>=8'
     resolution:
-      integrity: sha512-LL0OLyN6AnfV9xqGQpDBwedT2Rt63737LxvsRxbcwpa2aIeynBApG2Sm//F3TaLHIR1aJBN52DWklc06b94o5Q==
+      integrity: sha512-XBJbT3N4JhVumXE0eoLU9DCjcaF92KLNqTmFCnG1pf8duUxFGwtP6AD6nkjw9a3IdiRtL3E2w3JDiE/xi3vOeA==
   /string_decoder/1.1.1:
     dependencies:
       safe-buffer: 5.1.2
@@ -2159,7 +2150,6 @@ packages:
   /strip-ansi/6.0.0:
     dependencies:
       ansi-regex: 5.0.0
-    dev: true
     engines:
       node: '>=8'
     resolution:
@@ -2392,9 +2382,8 @@ packages:
   /wrap-ansi/7.0.0:
     dependencies:
       ansi-styles: 4.3.0
-      string-width: 4.2.1
+      string-width: 4.2.2
       strip-ansi: 6.0.0
-    dev: true
     engines:
       node: '>=10'
     resolution:
@@ -2404,7 +2393,6 @@ packages:
     resolution:
       integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
   /y18n/5.0.5:
-    dev: true
     engines:
       node: '>=10'
     resolution:
@@ -2419,6 +2407,11 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-WOkpgNhPTlE73h4VFAFsOnomJVaovO8VqLDzy5saChRBFQFBoMYirowyW+Q9HB4HFF4Z7VZTiG3iSzJJA29yRA==
+  /yargs-parser/20.2.7:
+    engines:
+      node: '>=10'
+    resolution:
+      integrity: sha512-FiNkvbeHzB/syOjIUxFDCnhSfzAL8R5vs40MgLFBorXACCOAEaWu0gRZl14vG8MR9AOJIZbmkjhusqBYZ3HTHw==
   /yargs-unparser/2.0.0:
     dependencies:
       camelcase: 6.2.0
@@ -2436,10 +2429,9 @@ packages:
       escalade: 3.1.1
       get-caller-file: 2.0.5
       require-directory: 2.1.1
-      string-width: 4.2.1
+      string-width: 4.2.2
       y18n: 5.0.5
-      yargs-parser: 20.2.4
-    dev: true
+      yargs-parser: 20.2.7
     engines:
       node: '>=10'
     resolution:
@@ -2457,3 +2449,4 @@ specifiers:
   knex: ^0.21.18
   mocha: ^8.3.0
   sqlite3: ^5.0.2
+  yargs: ^16.2.0

@@ -1,29 +1,24 @@
 {
-  "name": "data_service",
-  "version": "1.0.0",
+  "name": "schemate",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "bin/handle.js",
   "scripts": {
-    "start": "node -r esm index.js",
-    "dev": "nodemon -r esm index.js",
-    "knex": "knex $*",
-    "create": "node -r esm . create",
-    "migrate": "node -r esm . migrate",
-    "migrate:up": "node -r esm . up",
-    "migrate:down": "node -r esm . down",
-    "rollback": "node -r esm . rollback",
-    "list": "node -r esm . list",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ray Lawrence Henri Sison",
-  "license": "ISC",
+  "bin": {
+    "schemate": "bin/handle.js"
+  },
+  "author": "osairis100@gmail.com",
+  "license": "MIT",
   "dependencies": {
-    "knex": "^0.21.18"
+    "esm": "^3.2.25",
+    "knex": "^0.21.18",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "chai": "^4.3.0",
     "dotenv": "^8.2.0",
-    "esm": "^3.2.25",
     "mocha": "^8.3.0",
     "sqlite3": "^5.0.2"
   }
