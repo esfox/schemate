@@ -15,7 +15,7 @@ const commands = [
     },
   },
   {
-    command: 'list <module>',
+    command: 'list [module]',
     aliases: 'ls',
     describe: 'Lists the migration files of a given module.',
     handler: argv => console.log(Migrations.list(argv.module)),
