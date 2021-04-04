@@ -2,16 +2,35 @@
 require = require('esm')(module);
 
 const { Migrations } = require('../lib/migrations');
+const { Config } = require('../lib/config');
 
 /** @type {import('yargs').CommandModule[]} */
 const commands = [
+  {
+    command: 'init <knexPath>',
+    describe: 'Creates a config file in the root directory.',
+    handler: argv => {
+      Config.init({ knexPath: argv.knexPath });
+      console.log('Initialized config file.');
+    },
+  },
   {
     command: 'create <module> <filename>',
     aliases: 'new',
     describe: 'Create a new migration file for the given module.',
     handler: async argv => {
       const filepath = await Migrations.create(argv.module, argv.filename);
-      console.log(`Migration file created in '${filepath}'`);
+      console.log(`Migration file created in '${filepath}'.`);
+    },
+  },
+  {
+    command: 'add-module <moduleName> <directory>',
+    aliases: 'am',
+    describe: 'Adds a new module in the config file.',
+    handler: argv => {
+      const { moduleName, directory } = argv;
+      Config.addModule(moduleName, directory);
+      console.log(`Added '${moduleName}' module to the config.`);
     },
   },
   {
@@ -82,7 +101,11 @@ require('yargs')
   .scriptName('schemate')
   .command(commands)
   .fail((message, error, yargs) => {
-    console.error('Error: Missing arguments.\n\n', yargs.help());
+    if(error)
+      console.error(error);
+    else
+      console.error('Error: Missing arguments.\n\n', yargs.help());
+
     process.exit(1);
   })
   .argv;
