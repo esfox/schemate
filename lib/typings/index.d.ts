@@ -7,25 +7,25 @@ declare module 'schemate' {
   }
 
   class Config {
-    modules: { key: string, module: Module };
-    knex: knex;
-    init(args: { knexPath: string, migrationsDir?: string }): void;
-    addModule(moduleName: string, migrationsDir: string): void;
+    public static modules: { key: string, module: Module };
+    public static knex: knex;
+    public static init(args: { knexPath: string, migrationsDir?: string }): void;
+    public static addModule(moduleName: string, migrationsDir: string): void;
   }
 
   class Migrations {
-    create(moduleName: string, migrationName: string): string;
-    list(moduleName?: string): string[];
-    migrate(moduleName?: string): Promise<any>;
-    rollback(moduleName?: string): Promise<any>;
-    up(moduleName: string, migrationName?: string): Promise<[]>;
-    down(moduleName: string, migrationsName?: string): Promise<[]>;
+    public static create(moduleName: string, migrationName: string): string;
+    public static list(moduleName?: string): string[];
+    public static migrate(moduleName?: string): Promise<any>;
+    public static rollback(moduleName?: string): Promise<any>;
+    public static up(moduleName: string, migrationName?: string): Promise<[]>;
+    public static down(moduleName: string, migrationsName?: string): Promise<[]>;
   }
 
   class Utils {
-    getMigrationsDirectory(moduleName: string): string;
-    config(moduleName: string | string[]): knex.MigratorConfig;
-    validateModule(moduleName: string): void;
+    public static getMigrationsDirectory(moduleName: string): string;
+    public static config(moduleName: string | string[]): knex.MigratorConfig;
+    public static validateModule(moduleName: string): void;
   }
 }
 
