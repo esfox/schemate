@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 require = require('esm')(module);
 
-const { MigrationService } = require('../lib/migration-service');
+const { Migrations } = require('../lib/migrations');
 
 /** @type {import('yargs').CommandModule[]} */
 const commands = [
@@ -10,7 +10,7 @@ const commands = [
     aliases: 'new',
     describe: 'Create a new migration file for the given module.',
     handler: async argv => {
-      const filepath = await MigrationService.create(argv.module, argv.filename);
+      const filepath = await Migrations.create(argv.module, argv.filename);
       console.log(`Migration file created in '${filepath}'`);
     },
   },
@@ -18,7 +18,7 @@ const commands = [
     command: 'list <module>',
     aliases: 'ls',
     describe: 'Lists the migration files of a given module.',
-    handler: argv => console.log(MigrationService.list(argv.module)),
+    handler: argv => console.log(Migrations.list(argv.module)),
   },
   {
     command: 'migrate [module]',
@@ -26,7 +26,7 @@ const commands = [
     describe: 'Migrates the given module if provided, and all modules if none.',
     handler: async argv => {
       const { module } = argv;
-      await MigrationService.migrate(module);
+      await Migrations.migrate(module);
       console.log(`Migrated ${module ? `'${module}' module` : 'all modules'}.`);
       process.exit(1);
     },
@@ -37,7 +37,7 @@ const commands = [
     describe: 'Rollbacks the given module if provided, and all modules if none.',
     handler: async argv => {
       const { module } = argv;
-      await MigrationService.rollback(module);
+      await Migrations.rollback(module);
       console.log(`Rollbacked ${module ? `'${module}' module` : 'all modules'}.`);
       process.exit(1);
     }
@@ -49,7 +49,7 @@ const commands = [
       + 'If a migration filename is provided, the module is migrated up until the given migration.',
     handler: async argv => {
       try {
-        const result = await MigrationService.up(argv.module, argv.migration);
+        const result = await Migrations.up(argv.module, argv.migration);
         // TODO: Make proper output.
         console.log(result);
         process.exit(1);
@@ -66,7 +66,7 @@ const commands = [
       + 'If a migration filename is provided, the module is migrated down to the given migration.',
     handler: async argv => {
       try {
-        const result = await MigrationService.down(argv.module, argv.migration);
+        const result = await Migrations.down(argv.module, argv.migration);
         // TODO: Make proper output.
         console.log(result);
         process.exit(1);
