@@ -62,7 +62,6 @@ const commands = [
   {
     command: 'down <module> [migration]',
     aliases: 'd',
-    // down: MigrationService.down,
     describe: 'Migrates down a given module.\n'
       + 'If a migration filename is provided, the module is migrated down to the given migration.',
     handler: async argv => {

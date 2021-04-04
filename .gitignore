@@ -111,3 +111,6 @@ docs
 
 # Sample directory
 src
+
+# Sample config file
+schemate.json
