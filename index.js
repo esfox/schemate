@@ -1,5 +1,7 @@
-import { Config } from './lib/config';
-import { Migrations } from './lib/migrations';
-import { Utils } from './lib/utils';
+require = require('esm')(module);
 
-export { Config, Migrations, Utils };
+const { Config } = require('./lib/config');
+const { Migrations } = require('./lib/migrations');
+const { Utils } = require('./lib/utils');
+
+module.exports = { Config, Migrations, Utils };
