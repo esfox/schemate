@@ -1,5 +1,4 @@
 require = require('esm')(module);
-require('dotenv').config();
 
 const { Config } = require('./lib/config');
 const { Migrations } = require('./lib/migrations');
