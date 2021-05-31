@@ -108,4 +108,5 @@ require('yargs')
 
     process.exit(1);
   })
+  .demandCommand()
   .argv;
