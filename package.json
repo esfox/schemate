@@ -1,11 +1,9 @@
 {
   "name": "schemate",
   "version": "0.0.2",
-  "description": "",
+  "description": "Modular Database Migration CLI using Knex.js",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "bin": {
     "schemate": "bin/handle.js"
   },
