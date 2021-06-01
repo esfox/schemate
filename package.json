@@ -1,6 +1,6 @@
 {
   "name": "schemate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Modular Database Migration CLI using Knex.js",
   "main": "index.js",
   "scripts": {},

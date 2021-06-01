@@ -7,11 +7,11 @@ const { Config } = require('../lib/config');
 /** @type {import('yargs').CommandModule[]} */
 const commands = [
   {
-    command: 'init <knexPath>',
+    command: 'init [knexPath]',
     describe: 'Creates a config file in the root directory.',
     handler: argv => {
-      Config.init({ knexPath: argv.knexPath });
-      console.log('Initialized config file.');
+      if(Config.init({ knexPath: argv.knexPath }))
+        console.log('Created config file.');
     },
   },
   {
